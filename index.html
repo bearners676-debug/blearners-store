@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B-earners - Digital Products Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #fafafa;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            padding: 1.2rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .logo span {
+            color: #7CB342;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #7CB342;
+        }
+
+        .cart-icon {
+            font-size: 1.4rem;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .cart-icon::after {
+            content: '2';
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: #FFB300;
+            color: white;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+            padding: 8rem 5% 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(124, 179, 66, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 179, 0, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: #222;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #7CB342;
+            color: white;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(124, 179, 66, 0.3);
+        }
+
+        .cta-button:hover {
+            background: #689F38;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(124, 179, 66, 0.4);
+        }
+
+        /* Featured Products */
+        .section {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #222;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #ccc;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '📚';
+            font-size: 5rem;
+            opacity: 0.3;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            color: #7CB342;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .product-button {
+            width: 100%;
+            padding: 0.8rem;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .product-button:hover {
+            background: #7CB342;
+        }
+
+        /* Categories */
+        .categories {
+            background: white;
+            padding: 5rem 5%;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .category-card {
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            height: 300px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            display: flex;
+            align-items: flex-end;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: scale(1.02);
+        }
+
+        .category-card:nth-child(1) {
+            background: linear-gradient(135deg, rgba(124, 179, 66, 0.15) 0%, rgba(124, 179, 66, 0.05) 100%);
+        }
+
+        .category-card:nth-child(2) {
+            background: linear-gradient(135deg, rgba(255, 179, 0, 0.15) 0%, rgba(255, 179, 0, 0.05) 100%);
+        }
+
+        .category-card:nth-child(3) {
+            background: linear-gradient(135deg, rgba(51, 51, 51, 0.15) 0%, rgba(51, 51, 51, 0.05) 100%);
+        }
+
+        .category-content {
+            padding: 2rem;
+            width: 100%;
+            background: linear-gradient(to top, rgba(255,255,255,0.95) 0%, transparent 100%);
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #222;
+        }
+
+        .category-desc {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        /* Value Props */
+        .value-props {
+            padding: 4rem 5%;
+            background: #fafafa;
+        }
+
+        .props-container {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .prop-item {
+            text-align: center;
+            max-width: 250px;
+        }
+
+        .prop-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .prop-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .prop-text {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 5%;
+            background: white;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: #fafafa;
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid #7CB342;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background: linear-gradient(135deg, #7CB342 0%, #689F38 100%);
+            padding: 4rem 5%;
+            text-align: center;
+            color: white;
+        }
+
+        .newsletter h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+        }
+
+        .newsletter-button {
+            padding: 1rem 2.5rem;
+            background: #FFB300;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .newsletter-button:hover {
+            background: #FFA000;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: #ccc;
+            padding: 3rem 5% 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto 2rem;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #7CB342;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">B-<span>earners</span></div>
+        <ul class="nav-links">
+            <li><a href="#ebooks">Ebooks</a></li>
+            <li><a href="#journals">Journals</a></li>
+            <li><a href="#planners">Planners</a></li>
+            <li><a href="#bundles">Bundles</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li class="cart-icon">🛒</li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Unlock Your Potential. Download Instantly.</h1>
+            <p>Curated digital products designed to inspire creativity, boost productivity, and transform your daily routine.</p>
+            <a href="#products" class="cta-button">Shop All Products</a>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="section" id="products">
+        <h2 class="section-title">Featured Products</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Daily Mindfulness Journal</h3>
+                    <p class="product-price">$19.99</p>
+                    <button class="product-button">Learn More</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Complete Productivity Planner</h3>
+                    <p class="product-price">$24.99</p>
+                    <button class="product-button">Learn More</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Creative Writing Workbook</h3>
+                    <p class="product-price">$16.99</p>
+                    <button class="product-button">Learn More</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Goal Setting Bundle</h3>
+                    <p class="product-price">$29.99</p>
+                    <button class="product-button">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories">
+        <h2 class="section-title">Explore Our Collections</h2>
+        <div class="categories-grid">
+            <div class="category-card">
+                <div class="category-content">
+                    <h3 class="category-title">Creative Journals</h3>
+                    <p class="category-desc">Express yourself with beautifully designed journals for every mood and purpose.</p>
+                </div>
+            </div>
+            <div class="category-card">
+                <div class="category-content">
+                    <h3 class="category-title">Productivity Planners</h3>
+                    <p class="category-desc">Organize your life with planners that help you achieve your goals efficiently.</p>
+                </div>
+            </div>
+            <div class="category-card">
+                <div class="category-content">
+                    <h3 class="category-title">Premium Ebooks</h3>
+                    <p class="category-desc">Discover knowledge-packed ebooks covering personal growth, business, and creativity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Props -->
+    <section class="value-props">
+        <div class="props-container">
+            <div class="prop-item">
+                <div class="prop-icon">⚡</div>
+                <h3 class="prop-title">Instant Access</h3>
+                <p class="prop-text">Download immediately after purchase. No waiting, no shipping.</p>
+            </div>
+            <div class="prop-item">
+                <div class="prop-icon">✨</div>
+                <h3 class="prop-title">Expertly Designed</h3>
+                <p class="prop-text">Each product is carefully crafted by professionals for maximum impact.</p>
+            </div>
+            <div class="prop-item">
+                <div class="prop-icon">🎯</div>
+                <h3 class="prop-title">Curated Quality</h3>
+                <p class="prop-text">Only the best products make it to our store. Quality guaranteed.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"The productivity planner completely transformed how I organize my day. It's beautifully designed and so practical!"</p>
+                <p class="testimonial-author">— Sarah Mitchell</p>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"I love the instant download feature. The quality of the journals is outstanding, and they're so easy to print or use digitally."</p>
+                <p class="testimonial-author">— James Rodriguez</p>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Best digital products I've purchased! The ebooks are well-researched and the planners actually help me stay on track."</p>
+                <p class="testimonial-author">— Emma Thompson</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <h2>Stay Inspired</h2>
+        <p>Subscribe to get exclusive offers, productivity tips, and early access to new products.</p>
+        <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+            <button type="submit" class="newsletter-button">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Affiliate Program</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="#">All Products</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Bundles</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="social-icons">
+                    <a href="#">📘</a>
+                    <a href="#">📷</a>
+                    <a href="#">🐦</a>
+                    <a href="#">📌</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Refund Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 B-earners. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
