@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - B-earners</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #fafafa;
+        }
+
+        nav {
+            background: white;
+            padding: 1.2rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #7CB342;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #7CB342;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #7CB342 0%, #689F38 100%);
+            padding: 4rem 5%;
+            color: white;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .blog-container {
+            max-width: 1200px;
+            margin: 5rem auto;
+            padding: 0 5%;
+        }
+
+        .blog-categories {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .category-tag {
+            padding: 0.6rem 1.5rem;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .category-tag:hover,
+        .category-tag.active {
+            background: #7CB342;
+            border-color: #7CB342;
+            color: white;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .blog-image {
+            height: 220px;
+            background: linear-gradient(135deg, rgba(124, 179, 66, 0.1) 0%, rgba(124, 179, 66, 0.05) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .blog-content {
+            padding: 2rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .blog-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .blog-title {
+            font-size: 1.4rem;
+            color: #222;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .blog-excerpt {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .read-more {
+            color: #7CB342;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s;
+        }
+
+        .read-more:hover {
+            gap: 0.8rem;
+        }
+
+        .newsletter-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 5rem;
+        }
+
+        .newsletter-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #222;
+        }
+
+        .newsletter-section p {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .newsletter-btn {
+            padding: 1rem 2rem;
+            background: #7CB342;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .newsletter-btn:hover {
+            background: #689F38;
+        }
+
+        footer {
+            background: #222;
+            color: #ccc;
+            padding: 3rem 5% 2rem;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto 2rem;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #7CB342;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">B-<span>earners</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="ebooks.html">Ebooks</a></li>
+            <li><a href="journals.html">Journals</a></li>
+            <li><a href="planners.html">Planners</a></li>
+            <li><a href="bundles.html">Bundles</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-header">
+        <h1>B-earners Blog</h1>
+        <p>Tips, insights, and inspiration for productivity, creativity, and personal growth</p>
+    </div>
+
+    <div class="blog-container">
+        <div class="blog-categories">
+            <button class="category-tag active">All Posts</button>
+            <button class="category-tag">Productivity</button>
+            <button class="category-tag">Creativity</button>
+            <button class="category-tag">Wellness</button>
+            <button class="category-tag">Business</button>
+        </div>
+
+        <div class="blog-grid">
+            <article class="blog-card">
+                <div class="blog-image">📝</div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span>📅 Nov 5, 2025</span>
+                        <span>📁 Productivity</span>
+                    </div>
+                    <h2 class="blog-title">10 Morning Habits That Will Transform Your Day</h2>
+                    <p class="blog-excerpt">Discover how simple morning rituals can set you up for success and boost your productivity throughout the entire day.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-image">🎨</div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span>📅 Nov 3, 2025</span>
+                        <span>📁 Creativity</span>
+                    </div>
+                    <h2 class="blog-title">How to Overcome Creative Block and Find Inspiration</h2>
+                    <p class="blog-excerpt">Practical strategies and exercises to break through creative barriers and rediscover your artistic flow.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-image">🧘</div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span>📅 Oct 30, 2025</span>
+                        <span>📁 Wellness</span>
+                    </div>
+                    <h2 class="blog-title">The Power of Mindful Journaling for Mental Health</h2>
+                    <p class="blog-excerpt">Learn how daily journaling can reduce stress, improve mood, and enhance self-awareness.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-image">💼</div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span>📅 Oct 28, 2025</span>
+                        <span>📁 Business</span>
+                    </div>
+                    <h2 class="blog-title">Essential Time Management Skills for Entrepreneurs</h2>
+                    <p class="blog-excerpt">Master your schedule and maximize productivity with proven time management techniques for busy business owners.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-image">🎯</div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span>📅 Oct 25, 2025</span>
+                        <span>📁 Productivity</span>
+                    </div>
+                    <h2 class="blog-title">Goal Setting That Actually Works: A Step-by-Step Guide</h2>
+                    <p class="blog-excerpt">Stop setting goals you never achieve. Learn the SMART framework and action planning that delivers results.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-image">✍️</div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span>📅 Oct 22, 2025</span>
+                        <span>📁 Creativity</span>
+                    </div>
+                    <h2 class="blog-title">Bullet Journaling 101: Getting Started with This Life-Changing System</h2>
+                    <p class="blog-excerpt">Everything you need to know to start bullet journaling, from basic layouts to advanced techniques.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-image">🌱</div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span>📅 Oct 18, 2025</span>
+                        <span>📁 Wellness</span>
+                    </div>
+                    <h2 class="blog-title">Building Sustainable Habits: The Science of Lasting Change</h2>
+                    <p class="blog-excerpt">Understand the psychology behind habit formation and learn how to make positive changes stick.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-image">📊</div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span>📅 Oct 15, 2025</span>
+                        <span>📁 Business</span>
+                    </div>
+                    <h2 class="blog-title">The Freelancer's Guide to Staying Organized and Profitable</h2>
+                    <p class="blog-excerpt">Tools, tips, and templates to help freelancers manage projects, clients, and finances effectively.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-image">💡</div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span>📅 Oct 12, 2025</span>
+                        <span>📁 Productivity</span>
+                    </div>
+                    <h2 class="blog-title">Digital Minimalism: Declutter Your Digital Life</h2>
+                    <p class="blog-excerpt">Practical steps to reduce digital clutter, manage notifications, and reclaim your focus.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </article>
+        </div>
+
+        <div class="newsletter-section">
+            <h2>Never Miss a Post</h2>
+            <p>Subscribe to our newsletter for weekly tips, resources, and exclusive content delivered to your inbox.</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="affiliate.html">Affiliate Program</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="index.html">All Products</a></li>
+                    <li><a href="ebooks.html">Ebooks</a></li>
+                    <li><a href="journals.html">Journals</a></li>
+                    <li><a href="planners.html">Planners</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div style="display: flex; gap: 1rem; font-size: 1.5rem;">
+                    <a href="#">📘</a>
+                    <a href="#">📷</a>
+                    <a href="#">🐦</a>
+                    <a href="#">📌</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="refund.html">Refund Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 B-earners. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

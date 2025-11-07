@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affiliate Program - B-earners</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #fafafa;
+        }
+
+        nav {
+            background: white;
+            padding: 1.2rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #7CB342;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #7CB342;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #7CB342 0%, #689F38 100%);
+            padding: 5rem 5%;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .commission-badge {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            backdrop-filter: blur(10px);
+        }
+
+        .benefits-section {
+            max-width: 1200px;
+            margin: 5rem auto;
+            padding: 0 5%;
+        }
+
+        .benefits-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #222;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+
+        .benefit-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .benefit-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .how-it-works {
+            background: white;
+            padding: 5rem;
+            border-radius: 16px;
+            max-width: 1000px;
+            margin: 5rem auto;
+        }
+
+        .how-it-works h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #222;
+        }
+
+        .steps-container {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 60px;
+            height: 60px;
+            background: #7CB342;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .step-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .step-content p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, rgba(124, 179, 66, 0.1) 0%, rgba(124, 179, 66, 0.05) 100%);
+            padding: 4rem;
+            border-radius: 16px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 5rem auto;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #222;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .apply-btn {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: #7CB342;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(124, 179, 66, 0.3);
+        }
+
+        .apply-btn:hover {
+            background: #689F38;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(124, 179, 66, 0.4);
+        }
+
+        .faq-section {
+            max-width: 900px;
+            margin: 5rem auto;
+            padding: 0 5%;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #222;
+        }
+
+        .faq-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .faq-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: #333;
+        }
+
+        .faq-item p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        footer {
+            background: #222;
+            color: #ccc;
+            padding: 3rem 5% 2rem;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto 2rem;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #7CB342;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .how-it-works,
+            .cta-section {
+                padding: 3rem 2rem;
+            }
+
+            .step-item {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">B-<span>earners</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="ebooks.html">Ebooks</a></li>
+            <li><a href="journals.html">Journals</a></li>
+            <li><a href="planners.html">Planners</a></li>
+            <li><a href="bundles.html">Bundles</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero-section">
+        <h1>Join Our Affiliate Program</h1>
+        <p>Earn generous commissions by promoting digital products your audience will love</p>
+        <div class="commission-badge">💰 Earn up to 30% Commission</div>
+    </div>
+
+    <div class="benefits-section">
+        <h2>Why Partner With Us?</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">💵</div>
+                <h3>High Commissions</h3>
+                <p>Earn 30% commission on every sale. No limits, no caps. The more you promote, the more you earn.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🎯</div>
+                <h3>Quality Products</h3>
+                <p>Promote products that truly deliver value. High customer satisfaction means better conversion rates.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">📊</div>
+                <h3>Real-Time Tracking</h3>
+                <p>Access a comprehensive dashboard to track clicks, conversions, and earnings in real-time.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🎨</div>
+                <h3>Marketing Materials</h3>
+                <p>Get banners, social media graphics, email templates, and more to make promotion easy.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">⚡</div>
+                <h3>Fast Payouts</h3>
+                <p>Receive your earnings via PayPal or bank transfer. Monthly payouts with a low $50 threshold.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🤝</div>
+                <h3>Dedicated Support</h3>
+                <p>Our affiliate team is here to help you succeed with personalized support and guidance.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="steps-container">
+            <div class="step-item">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Apply to Join</h3>
+                    <p>Fill out our simple application form. We review applications within 24-48 hours and approve most applicants.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Get Your Unique Link</h3>
+                    <p>Once approved, you'll receive your unique affiliate link and access to our marketing resources.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Promote Our Products</h3>
+                    <p>Share your link on your blog, social media, email list, or anywhere your audience hangs out.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Earn Commissions</h3>
+                    <p>Earn 30% commission on every sale. Track your performance in real-time and watch your earnings grow.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cta-section">
+        <h2>Ready to Start Earning?</h2>
+        <p>Join thousands of affiliates who trust B-earners to help them earn passive income.</p>
+        <a href="contact.html" class="apply-btn">Apply Now</a>
+    </div>
+
+    <div class="faq-section">
+        <h2>Affiliate FAQ</h2>
+        <div class="faq-item">
+            <h3>Who can become an affiliate?</h3>
+            <p>Anyone with an audience that would benefit from our products! Bloggers, influencers, educators, content creators, and website owners are welcome to apply.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Is there a cost to join?</h3>
+            <p>No! Our affiliate program is completely free to join. There are no signup fees or hidden costs.</p>
+        </div>
+        <div class="faq-item">
+            <h3>What is the cookie duration?</h3>
+            <p>We offer a generous 60-day cookie duration. If someone clicks your link and purchases within 60 days, you earn the commission.</p>
+        </div>
+        <div class="faq-item">
+            <h3>When and how do I get paid?</h3>
+            <p>Payments are processed monthly via PayPal or bank transfer. The minimum payout threshold is $50.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Can I promote on social media?</h3>
+            <p>Absolutely! You can promote our products on any platform where you have an audience - blogs, YouTube, Instagram, Facebook, Twitter, TikTok, and more.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Do you provide promotional materials?</h3>
+            <p>Yes! We provide banners, social media graphics, product images, email swipes, and sample content to make promoting easy and effective.</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="affiliate.html">Affiliate Program</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="index.html">All Products</a></li>
+                    <li><a href="ebooks.html">Ebooks</a></li>
+                    <li><a href="journals.html">Journals</a></li>
+                    <li><a href="planners.html">Planners</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div style="display: flex; gap: 1rem; font-size: 1.5rem;">
+                    <a href="#">📘</a>
+                    <a href="#">📷</a>
+                    <a href="#">🐦</a>
+                    <a href="#">📌</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="refund.html">Refund Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 B-earners. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
