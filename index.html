@@ -35,6 +35,7 @@
             font-size: 1.8rem;
             font-weight: 700;
             color: #333;
+            text-decoration: none;
         }
 
         .logo span {
@@ -494,11 +495,11 @@
 <body>
     <!-- Navigation -->
     <nav>
-        <div class="logo">B-<span>earners</span></div>
+        <a href="index.html" class="logo">B-<span>earners</span></a>
         <ul class="nav-links">
-            <li><a href="#ebooks">Ebooks</a></li>
-            <li><a href="#journals">Journals</a></li>
-            <li><a href="#planners">Planners</a></li>
+            <li><a href="ebooks.html">Ebooks</a></li>
+            <li><a href="journals.html">Journals</a></li>
+            <li><a href="planners.html">Planners</a></li>
             <li><a href="#bundles">Bundles</a></li>
             <li><a href="#contact">Contact</a></li>
             <li class="cart-icon">🛒</li>
@@ -523,7 +524,7 @@
                 <div class="product-info">
                     <h3 class="product-title">Daily Mindfulness Journal</h3>
                     <p class="product-price">$19.99</p>
-                    <button class="product-button">Learn More</button>
+                    <button class="product-button" onclick="window.location.href='journals.html'">Learn More</button>
                 </div>
             </div>
             <div class="product-card">
@@ -531,7 +532,7 @@
                 <div class="product-info">
                     <h3 class="product-title">Complete Productivity Planner</h3>
                     <p class="product-price">$24.99</p>
-                    <button class="product-button">Learn More</button>
+                    <button class="product-button" onclick="window.location.href='planners.html'">Learn More</button>
                 </div>
             </div>
             <div class="product-card">
@@ -539,7 +540,7 @@
                 <div class="product-info">
                     <h3 class="product-title">Creative Writing Workbook</h3>
                     <p class="product-price">$16.99</p>
-                    <button class="product-button">Learn More</button>
+                    <button class="product-button" onclick="window.location.href='ebooks.html'">Learn More</button>
                 </div>
             </div>
             <div class="product-card">
@@ -557,19 +558,19 @@
     <section class="categories">
         <h2 class="section-title">Explore Our Collections</h2>
         <div class="categories-grid">
-            <div class="category-card">
+            <div class="category-card" onclick="window.location.href='journals.html'">
                 <div class="category-content">
                     <h3 class="category-title">Creative Journals</h3>
                     <p class="category-desc">Express yourself with beautifully designed journals for every mood and purpose.</p>
                 </div>
             </div>
-            <div class="category-card">
+            <div class="category-card" onclick="window.location.href='planners.html'">
                 <div class="category-content">
                     <h3 class="category-title">Productivity Planners</h3>
                     <p class="category-desc">Organize your life with planners that help you achieve your goals efficiently.</p>
                 </div>
             </div>
-            <div class="category-card">
+            <div class="category-card" onclick="window.location.href='ebooks.html'">
                 <div class="category-content">
                     <h3 class="category-title">Premium Ebooks</h3>
                     <p class="category-desc">Discover knowledge-packed ebooks covering personal growth, business, and creativity.</p>
@@ -643,10 +644,10 @@
             <div class="footer-section">
                 <h3>Shop</h3>
                 <ul>
-                    <li><a href="#">All Products</a></li>
-                    <li><a href="#">Best Sellers</a></li>
-                    <li><a href="#">New Arrivals</a></li>
-                    <li><a href="#">Bundles</a></li>
+                    <li><a href="index.html">All Products</a></li>
+                    <li><a href="ebooks.html">Ebooks</a></li>
+                    <li><a href="journals.html">Journals</a></li>
+                    <li><a href="planners.html">Planners</a></li>
                 </ul>
             </div>
             <div class="footer-section">

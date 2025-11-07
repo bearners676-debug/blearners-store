@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planners - B-earners Digital Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #fafafa;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            padding: 1.2rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #7CB342;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #7CB342;
+        }
+
+        .nav-links a.active {
+            border-bottom: 2px solid #7CB342;
+            padding-bottom: 4px;
+        }
+
+        .search-cart {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-input {
+            padding: 0.6rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            width: 200px;
+        }
+
+        .cart-button {
+            padding: 0.6rem 1.5rem;
+            background: #7CB342;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: white;
+            padding: 3rem 5%;
+            margin-top: 2rem;
+            border-radius: 12px;
+            margin-left: 5%;
+            margin-right: 5%;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: #222;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .results-count {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: #f5f5f5;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Filters Section */
+        .filters-section {
+            padding: 2rem 5%;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        select {
+            padding: 0.6rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            background: white;
+            cursor: pointer;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.6rem 1.2rem;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover {
+            border-color: #7CB342;
+            color: #7CB342;
+        }
+
+        .filter-btn.active {
+            background: rgba(124, 179, 66, 0.1);
+            border-color: #7CB342;
+            color: #7CB342;
+        }
+
+        .clear-btn {
+            padding: 0.6rem 1.2rem;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        /* Products Grid */
+        .products-container {
+            padding: 0 5% 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .product-image {
+            aspect-ratio: 3/4;
+            background: linear-gradient(135deg, #e8f5e9 0%, rgba(124, 179, 66, 0.2) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .product-cover {
+            width: 70%;
+            height: 80%;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .product-cover-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-cover-category {
+            font-size: 0.75rem;
+            color: #999;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-category {
+            font-size: 0.85rem;
+            color: #999;
+            margin-bottom: 1rem;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #7CB342;
+        }
+
+        .view-details-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(124, 179, 66, 0.1);
+            border: 1px solid rgba(124, 179, 66, 0.2);
+            color: #7CB342;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .view-details-btn:hover {
+            background: #7CB342;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: #ccc;
+            padding: 3rem 5% 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto 2rem;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #7CB342;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #888;
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #666;
+        }
+
+        .no-results h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .search-input {
+                width: 150px;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .filters-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">B-<span>earners</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="ebooks.html">Ebooks</a></li>
+            <li><a href="journals.html">Journals</a></li>
+            <li><a href="planners.html" class="active">Planners</a></li>
+            <li><a href="bundles.html">Bundles</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="search-cart">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search planners...">
+            <a href="cart.html" class="cart-button">Cart</a>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>Planners</h1>
+        <p>Organize your life with planners designed to help you achieve your goals and boost productivity.</p>
+        <span class="results-count">Showing <span id="resultCount">8</span> items</span>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters-section">
+        <div class="filter-group">
+            <span class="filter-label">Sort By:</span>
+            <select id="sortSelect">
+                <option value="newest">Newest</option>
+                <option value="price-asc">Price (Low to High)</option>
+                <option value="price-desc">Price (High to Low)</option>
+                <option value="popularity">Popularity</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <span class="filter-label">Filter By:</span>
+            <div class="filter-buttons">
+                <button class="filter-btn" data-category="Daily">Daily</button>
+                <button class="filter-btn" data-category="Weekly">Weekly</button>
+                <button class="filter-btn" data-category="Monthly">Monthly</button>
+                <button class="filter-btn" data-category="Goal Setting">Goal Setting</button>
+                <button class="clear-btn" id="clearFilters">Clear</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="products-container">
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will be inserted here by JavaScript -->
+        </div>
+        <div class="no-results" id="noResults" style="display: none;">
+            <h3>No planners found</h3>
+            <p>Try adjusting your search or filters</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Affiliate Program</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="index.html">All Products</a></li>
+                    <li><a href="ebooks.html">Ebooks</a></li>
+                    <li><a href="journals.html">Journals</a></li>
+                    <li><a href="planners.html">Planners</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div style="display: flex; gap: 1rem; font-size: 1.5rem;">
+                    <a href="#">📘</a>
+                    <a href="#">📷</a>
+                    <a href="#">🐦</a>
+                    <a href="#">📌</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Refund Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 B-earners. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Products data
+        const products = [
+            { id: 1, title: 'Complete Productivity Planner', price: 24.99, category: 'Daily', popularity: 98, date: '2025-10-20' },
+            { id: 2, title: 'Weekly Success Organizer', price: 18.99, category: 'Weekly', popularity: 87, date: '2025-09-15' },
+            { id: 3, title: 'Monthly Goal Tracker', price: 16.50, category: 'Monthly', popularity: 82, date: '2025-08-05' },
+            { id: 4, title: 'Vision & Goals Planner', price: 22.99, category: 'Goal Setting', popularity: 94, date: '2025-11-01' },
+            { id: 5, title: 'Daily Habits Planner', price: 19.99, category: 'Daily', popularity: 90, date: '2025-07-12' },
+            { id: 6, title: 'Project Management Planner', price: 26.99, category: 'Weekly', popularity: 85, date: '2025-06-22' },
+            { id: 7, title: 'Financial Goals Planner', price: 21.50, category: 'Goal Setting', popularity: 88, date: '2025-05-18' },
+            { id: 8, title: 'Academic Year Planner', price: 20.99, category: 'Monthly', popularity: 79, date: '2025-04-10' },
+        ];
+
+        let activeFilters = new Set();
+        let currentSort = 'newest';
+        let searchQuery = '';
+
+        // Initialize
+        renderProducts();
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            searchQuery = e.target.value.toLowerCase();
+            renderProducts();
+        });
+
+        // Sort functionality
+        document.getElementById('sortSelect').addEventListener('change', (e) => {
+            currentSort = e.target.value;
+            renderProducts();
+        });
+
+        // Filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const category = btn.dataset.category;
+                if (activeFilters.has(category)) {
+                    activeFilters.delete(category);
+                    btn.classList.remove('active');
+                } else {
+                    activeFilters.add(category);
+                    btn.classList.add('active');
+                }
+                renderProducts();
+            });
+        });
+
+        // Clear filters
+        document.getElementById('clearFilters').addEventListener('click', () => {
+            activeFilters.clear();
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            renderProducts();
+        });
+
+        // Render products
+        function renderProducts() {
+            let filtered = products.filter(p => {
+                const matchesSearch = p.title.toLowerCase().includes(searchQuery);
+                const matchesFilter = activeFilters.size === 0 || activeFilters.has(p.category);
+                return matchesSearch && matchesFilter;
+            });
+
+            // Sort
+            switch(currentSort) {
+                case 'price-asc':
+                    filtered.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-desc':
+                    filtered.sort((a, b) => b.price - a.price);
+                    break;
+                case 'popularity':
+                    filtered.sort((a, b) => b.popularity - a.popularity);
+                    break;
+                case 'newest':
+                default:
+                    filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+            }
+
+            // Update count
+            document.getElementById('resultCount').textContent = filtered.length;
+
+            // Render
+            const grid = document.getElementById('productsGrid');
+            const noResults = document.getElementById('noResults');
+
+            if (filtered.length === 0) {
+                grid.style.display = 'none';
+                noResults.style.display = 'block';
+            } else {
+                grid.style.display = 'grid';
+                noResults.style.display = 'none';
+                grid.innerHTML = filtered.map(p => `
+                    <div class="product-card">
+                        <div class="product-image">
+                            <span class="product-badge">PLANNER</span>
+                            <div class="product-cover">
+                                <div class="product-cover-title">${p.title}</div>
+                                <div class="product-cover-category">${p.category}</div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">${p.title}</h3>
+                            <div class="product-category">${p.category}</div>
+                            <div class="product-footer">
+                                <span class="product-price">$${p.price.toFixed(2)}</span>
+                                <a href="product.html?id=${p.id}" class="view-details-btn">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+    </script>
+</body>
+</html>
