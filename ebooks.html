@@ -355,306 +355,45 @@
             accent-color: #7CB342;
         }
 
-        /* Footer */
-        footer {
-            background: #222;
-            color: #ccc;
-            padding: 3rem 5% 2rem;
-            margin-top: 4rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            max-width: 1400px;
-            margin: 0 auto 2rem;
-        }
-
-        .footer-section h3 {
-            color: white;
-            margin-bottom: 1rem;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section a {
-            color: #ccc;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 0.5rem;
-            transition: color 0.3s;
-        }
-
-        .footer-section a:hover {
-            color: #7CB342;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid #444;
-            color: #888;
-        }
-
-        /* No Results */
-        .no-results {
-            text-align: center;
-            padding: 4rem 2rem;
-            color: #666;
-        }
-
-        .no-results h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
-
-            .search-input {
-                width: 150px;
-            }
-
-            .page-header h1 {
-                font-size: 2rem;
-            }
-
-            .filters-section {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-                gap: 1.5rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Navigation -->
-    <nav>
-        <a href="index.html" class="logo">B-<span>earners</span></a>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="ebooks.html" class="active">Ebooks</a></li>
-            <li><a href="journals.html">Journals</a></li>
-            <li><a href="planners.html">Planners</a></li>
-            <li><a href="bundles.html">Bundles</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-        <div class="search-cart">
-            <input type="text" class="search-input" id="searchInput" placeholder="Search ebooks...">
-            <a href="cart.html" class="cart-button">Cart</a>
+      <footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="affiliate.html">Affiliate Program</a></li>
+            </ul>
         </div>
-    </nav>
-
-    <!-- Page Header -->
-    <div class="page-header">
-        <h1>Ebooks</h1>
-        <p>Deep dive into knowledge & growth — curated ebooks to help you learn, create and lead.</p>
-        <span class="results-count">Showing <span id="resultCount">8</span> items</span>
-    </div>
-
-    <!-- Filters -->
-    <div class="filters-section">
-        <div class="filter-group">
-            <span class="filter-label">Sort By:</span>
-            <select id="sortSelect">
-                <option value="newest">Newest</option>
-                <option value="price-asc">Price (Low to High)</option>
-                <option value="price-desc">Price (High to Low)</option>
-                <option value="popularity">Popularity</option>
-            </select>
+        <div class="footer-section">
+            <h3>Shop</h3>
+            <ul>
+                <li><a href="index.html">All Products</a></li>
+                <li><a href="ebooks.html">Ebooks</a></li>
+                <li><a href="journals.html">Journals</a></li>
+                <li><a href="planners.html">Planners</a></li>
+            </ul>
         </div>
-
-        <div class="filter-group">
-            <span class="filter-label">Filter By:</span>
-            <div class="filter-buttons">
-                <button class="filter-btn" data-category="Business">Business</button>
-                <button class="filter-btn" data-category="Wellness">Wellness</button>
-                <button class="filter-btn" data-category="Creative">Creative</button>
-                <button class="filter-btn" data-category="Guides">Guides</button>
-                <button class="clear-btn" id="clearFilters">Clear</button>
+        <div class="footer-section">
+            <h3>Connect</h3>
+            <div style="display: flex; gap: 1rem; font-size: 1.5rem;">
+                <a href="#">📘</a>
+                <a href="#">📷</a>
+                <a href="#">🐦</a>
+                <a href="#">📌</a>
             </div>
+        </div>
+        <div class="footer-section">
+            <h3>Legal</h3>
+            <ul>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="refund.html">Refund Policy</a></li>
+            </ul>
         </div>
     </div>
-
-    <!-- Products Grid -->
-    <div class="products-container">
-        <div class="products-grid" id="productsGrid">
-            <!-- Products will be inserted here by JavaScript -->
-        </div>
-        <div class="no-results" id="noResults" style="display: none;">
-            <h3>No ebooks found</h3>
-            <p>Try adjusting your search or filters</p>
-        </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 B-earners. All rights reserved.</p>
     </div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Affiliate Program</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Shop</h3>
-                <ul>
-                    <li><a href="index.html">All Products</a></li>
-                    <li><a href="ebooks.html">Ebooks</a></li>
-                    <li><a href="journals.html">Journals</a></li>
-                    <li><a href="planners.html">Planners</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Connect</h3>
-                <div style="display: flex; gap: 1rem; font-size: 1.5rem;">
-                    <a href="#">📘</a>
-                    <a href="#">📷</a>
-                    <a href="#">🐦</a>
-                    <a href="#">📌</a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h3>Legal</h3>
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Refund Policy</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 B-earners. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        // Products data
-        const products = [
-            { id: 1, title: 'Mindful Leadership', price: 12.99, category: 'Business', popularity: 92, date: '2025-09-01' },
-            { id: 2, title: 'Wellness Rituals', price: 8.99, category: 'Wellness', popularity: 78, date: '2025-06-12' },
-            { id: 3, title: 'Creative Sketching Guide', price: 6.50, category: 'Creative', popularity: 84, date: '2025-10-05' },
-            { id: 4, title: 'The Freelance Playbook', price: 14.00, category: 'Business', popularity: 88, date: '2025-07-22' },
-            { id: 5, title: 'Guides to Habit Change', price: 5.99, category: 'Guides', popularity: 70, date: '2025-08-14' },
-            { id: 6, title: 'Slow Living Manual', price: 9.49, category: 'Wellness', popularity: 65, date: '2025-05-03' },
-            { id: 7, title: 'Design Systems in Practice', price: 19.99, category: 'Creative', popularity: 95, date: '2025-11-01' },
-            { id: 8, title: 'Pocket Productivity', price: 4.99, category: 'Guides', popularity: 60, date: '2025-02-10' },
-        ];
-
-        let activeFilters = new Set();
-        let currentSort = 'newest';
-        let searchQuery = '';
-
-        // Initialize
-        renderProducts();
-
-        // Search functionality
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            searchQuery = e.target.value.toLowerCase();
-            renderProducts();
-        });
-
-        // Sort functionality
-        document.getElementById('sortSelect').addEventListener('change', (e) => {
-            currentSort = e.target.value;
-            renderProducts();
-        });
-
-        // Filter buttons
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const category = btn.dataset.category;
-                if (activeFilters.has(category)) {
-                    activeFilters.delete(category);
-                    btn.classList.remove('active');
-                } else {
-                    activeFilters.add(category);
-                    btn.classList.add('active');
-                }
-                renderProducts();
-            });
-        });
-
-        // Clear filters
-        document.getElementById('clearFilters').addEventListener('click', () => {
-            activeFilters.clear();
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            renderProducts();
-        });
-
-        // Render products
-        function renderProducts() {
-            let filtered = products.filter(p => {
-                const matchesSearch = p.title.toLowerCase().includes(searchQuery);
-                const matchesFilter = activeFilters.size === 0 || activeFilters.has(p.category);
-                return matchesSearch && matchesFilter;
-            });
-
-            // Sort
-            switch(currentSort) {
-                case 'price-asc':
-                    filtered.sort((a, b) => a.price - b.price);
-                    break;
-                case 'price-desc':
-                    filtered.sort((a, b) => b.price - a.price);
-                    break;
-                case 'popularity':
-                    filtered.sort((a, b) => b.popularity - a.popularity);
-                    break;
-                case 'newest':
-                default:
-                    filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
-            }
-
-            // Update count
-            document.getElementById('resultCount').textContent = filtered.length;
-
-            // Render
-            const grid = document.getElementById('productsGrid');
-            const noResults = document.getElementById('noResults');
-
-            if (filtered.length === 0) {
-                grid.style.display = 'none';
-                noResults.style.display = 'block';
-            } else {
-                grid.style.display = 'grid';
-                noResults.style.display = 'none';
-                grid.innerHTML = filtered.map(p => `
-                    <div class="product-card">
-                        <div class="product-image">
-                            <span class="product-badge">EBOOK</span>
-                            <div class="product-cover">
-                                <div class="product-cover-title">${p.title}</div>
-                                <div class="product-cover-category">${p.category}</div>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-title">${p.title}</h3>
-                            <div class="product-category">${p.category}</div>
-                            <div class="product-footer">
-                                <span class="product-price">$${p.price.toFixed(2)}</span>
-                                <a href="product.html?id=${p.id}" class="view-details-btn">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
-            }
-        }
-    </script>
-</body>
-</html>
+</footer>
